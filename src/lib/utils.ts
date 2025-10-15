@@ -13,19 +13,24 @@ export function generateAvatar(name: string, gender: "MALE" | "FEMALE") {
   return `${base}/boy?username=${username}`;
 }
 
-// phone formatting function for US numbers - ai generated 🎉
+// Fonction pour formater les numéros de téléphone de Djibouti
 export const formatPhoneNumber = (value: string) => {
   if (!value) return value;
 
+  // On retire tout sauf les chiffres
   const phoneNumber = value.replace(/[^\d]/g, "");
   const phoneNumberLength = phoneNumber.length;
 
-  if (phoneNumberLength < 4) return phoneNumber;
-  if (phoneNumberLength < 7) {
-    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
-  }
-  return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3, 6)}-${phoneNumber.slice(6, 10)}`;
+  // Ajouter le préfixe +253 si nécessaire
+  let formatted = phoneNumber.startsWith("253") ? phoneNumber : `253${phoneNumber}`;
+
+  // Vérifier qu'il y a bien 12 chiffres (+253 + 8 chiffres locaux)
+  if (formatted.length !== 12) return value;
+
+  // Formatage : +253 XX XXX XXX
+  return `+${formatted.slice(0, 3)} ${formatted.slice(3, 5)} ${formatted.slice(5, 8)} ${formatted.slice(8, 11)}`;
 };
+
 
 //  ai generated 🎉
 export const getNext5Days = () => {
@@ -60,8 +65,9 @@ export const getAvailableTimeSlots = () => {
 };
 
 export const APPOINTMENT_TYPES = [
-  { id: "checkup", name: "Regular Checkup", duration: "60 min", price: "$120" },
-  { id: "cleaning", name: "Teeth Cleaning", duration: "45 min", price: "$90" },
-  { id: "consultation", name: "Consultation", duration: "30 min", price: "$75" },
-  { id: "emergency", name: "Emergency Visit", duration: "30 min", price: "$150" },
+  { id: "checkup", name: "Bilan régulier", duration: "60 min", price: "21 240 FDJ" },
+  { id: "cleaning", name: "Nettoyage des dents", duration: "45 min", price: "15 930 FDJ" },
+  { id: "consultation", name: "Consultation", duration: "30 min", price: "13 275 FDJ" },
+  { id: "emergency", name: "Urgence dentaire", duration: "30 min", price: "26 550 FDJ" },
 ];
+
