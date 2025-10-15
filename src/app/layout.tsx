@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -14,12 +15,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "DentWise - Assistant Dentaire IA",
+  title: "DentWise - AI Powered Dental Assistant",
   description:
-    "Obtenez des conseils dentaires instantanés par appel vocal avec notre assistant intelligent, disponible 24h/24 et 7j/7.",
+    "Get instant dental advice through voice calls with our AI assistant. Avaiable 24/7.",
 };
-
-
 
 export default function RootLayout({
   children,
@@ -27,15 +26,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-     <ClerkProvider>
-
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-          >
-          {children}
-        </body>
-      </html>
-        </ClerkProvider>
+      <ClerkProvider
+        appearance={{
+          variables: {
+            colorPrimary: "#e78a53",
+            colorBackground: "#f3f4f6",
+            colorText: "#111827",
+            colorTextSecondary: "#6b7280",
+            colorInputBackground: "#f3f4f6",
+          },
+        }}
+      >
+        <html lang="en">
+          <body className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}>
+            
+            <Toaster />
+            {children}
+          </body>
+        </html>
+      </ClerkProvider>
   );
 }
