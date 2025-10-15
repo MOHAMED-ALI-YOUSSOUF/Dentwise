@@ -54,7 +54,7 @@ function Hero() {
 
               {/* CTA BUTTONS */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                <SignUpButton mode="modal">
+                <SignUpButton mode="modal" >
                   <Button size="lg" className="w-full sm:w-auto">
                     <MicIcon className="mr-2 size-5" />
                     Essayer l’agent vocal

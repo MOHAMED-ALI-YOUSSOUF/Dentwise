@@ -92,7 +92,7 @@ function Footer() {
 
         {/* Copyright */}
         <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-          <p>&copy; { date} DentWise. Conçu pour de vraies personnes avec de vraies questions dentaires.</p>
+          <p>&copy; {date} DentWise. Conçu pour de vraies personnes avec de vraies questions dentaires.</p>
         </div>
       </div>
     </footer>

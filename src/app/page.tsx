@@ -5,8 +5,7 @@ import Hero from "@/components/landing/Hero";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Pricing from "@/components/landing/Pricing";
 import WhatToAsk from "@/components/landing/WhatToAsk";
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import Image from "next/image";
+
 
 export default function Home() {
   return (
