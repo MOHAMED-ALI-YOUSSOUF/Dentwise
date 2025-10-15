@@ -1,7 +1,7 @@
 import { useUpdateDoctor } from "@/hooks/use-doctors";
 import { formatPhoneNumber } from "@/lib/utils";
 import { Doctor, Gender } from "@prisma/client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -24,6 +24,11 @@ interface EditDoctorDialogProps {
 function EditDoctorDialog({ doctor, isOpen, onClose }: EditDoctorDialogProps) {
   const [editingDoctor, setEditingDoctor] = useState<Doctor | null>(doctor);
 
+useEffect(() => {
+  if (isOpen) {
+    setEditingDoctor(doctor);
+  }
+}, [doctor, isOpen]);
   const updateDoctorMutation = useUpdateDoctor();
 
   const handlePhoneChange = (value: string) => {

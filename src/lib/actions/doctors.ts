@@ -45,7 +45,8 @@ export async function createDoctor(input: CreateDoctorInput) {
     });
 
     revalidatePath("/admin");
-
+    revalidatePath("/appointments"); // If doctors are shown in appointment booking
+ 
     return doctor;
   } catch (error: any) {
     console.error("Error creating doctor:", error);
@@ -70,7 +71,7 @@ export async function updateDoctor(input: UpdateDoctorInput) {
 
     const currentDoctor = await prisma.doctor.findUnique({
       where: { id: input.id },
-      select: { email: true },
+       select: { email: true, name: true, gender: true },
     });
 
     if (!currentDoctor) throw new Error("Doctor not found");
