@@ -5,12 +5,21 @@ import Hero from "@/components/landing/Hero";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Pricing from "@/components/landing/Pricing";
 import WhatToAsk from "@/components/landing/WhatToAsk";
-import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
-import Image from "next/image";
+import { syncUser } from "@/lib/actions/users";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser();
+
+  // the best way of syncing => webhooks
+  await syncUser();
+
+  // redirect auth user to dashboard
+  if (user) redirect("/dashboard");
+
   return (
-     <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background">
       <Header />
       <Hero />
       <HowItWorks />
